@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flack chat app</title>
+
+    {{ JSGlue.include() }}
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <h1>Welcome to Flack!</h1>
+    <form id="form" class="display_name_form">
+        <p>A simple chat application based on flask and javascript, where you can make discuss channels, talk and send files to other users.</p>
+        <h2>Please, insert your display name.</h2>
+        <input type="text" name="display_name" placeholder="Your display name" id="display_name">
+        <button>Submit</button>
+    </form>
+    <div class="channels">
+        <form id="add_channel">
+            <input type="text" id="new_channel" name="new_channel" placeholder="Add a new channel">
+            <label id="label_new" for="new_channel"></label>
+            <button id="add_channel_btn">Add</button>
+        </form>
+        <h2>Channels</h2>
+        <ul id="channels_list">
+            {% for channel in channels %}
+                <li><a class="channel_link" href="{{ url_for('channel', type = channel) }}">{{ channel }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="channel_window" class="channel_window">
+        <a href="{{ url_for('index') }}" id="channels_list_btn" class="button">Go back to the list of channels</a>
+        <div id="messages" class="messages">
+            
+        </div>
+        <form id="message_window">
+            <input type="text" id="message" name="message" placeholder="Write your message here.">
+            <button id="send_message_btn">Send</button>
+        </form>
+        <p>Attach file as a message</p>
+        <form id="send_file">
+            <input class="button custom_file_input" type="file" id="file" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif">
+            <button id="send_file_btn">Attach file</button>
+        </form>
+    </div>
+</body>
+</html>
