@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    localStorage.removeItem('display_name');
-    localStorage.removeItem('current_channel');
     // saving display name from the user on the local storage
     const form = document.querySelector('#form');
     const channels = document.querySelector('.channels');
